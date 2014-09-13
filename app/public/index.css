@@ -1,0 +1,7 @@
+#possible-matches-list {
+  list-style-type: none;
+}
+
+#possible-matches-list h3 {
+  display:inline;
+}

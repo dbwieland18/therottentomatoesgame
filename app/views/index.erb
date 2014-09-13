@@ -1,8 +1,23 @@
+<head>
+  <link href="/index.css" rel="stylesheet" type="text/css" />
+</head>
 <form action="/searchMovies" method="post">
   <input type="text" name="title">
   <input type="submit">
 </form>
-
-<% if @movies %>
-  <div><%= @movies %></div>
-<% end %>
+<div id="search-results">
+  <% if @movies %>
+    <ul id="possible-matches-list">
+      <% @movies.each do |movie| %>
+        <li style="list-style-none:none;">
+          <img src=<%=movie.posters.thumbnail%>>
+          <h3><%= movie.title %></h3>
+          <% movie.abridged_cast.each do |actor| %>
+            <%= actor.name %>
+          <% end %>
+          <h3><%= movie.year %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
