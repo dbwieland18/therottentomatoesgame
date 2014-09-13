@@ -1,0 +1,8 @@
+<form action="/searchMovies" method="post">
+  <input type="text" name="title">
+  <input type="submit">
+</form>
+
+<% if @movies %>
+  <div><%= @movies %></div>
+<% end %>
