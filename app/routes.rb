@@ -3,18 +3,26 @@ require 'rubygems'
 require 'rottentomatoes'
 require 'pry'
 include RottenTomatoes
+enable :sessions
 
 #API key setup
 Rotten.api_key = "pddzts5bbcxpagtke4q5b6cn"
 
 get '/' do
+  # binding.pry
+  @upcoming_game = session
   erb :index
 end
 
 post '/searchMovies' do
   @movies = RottenMovie.find(:title => params[:title], :limit => 3)
-  # binding.pry
+  @upcoming_game = session
   erb :index
+end
+
+post '/addToGame' do
+  # binding.pry
+  session[params[:movieTitle]] = params[:movieId]
 end
 
 # title       => @movie.title
