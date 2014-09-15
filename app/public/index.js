@@ -1,4 +1,3 @@
-console.log('found the file')
 $(document).ready(function() {
   $('button.add').on('click', function(){
     var id = $(this).attr('data-movieid');
@@ -22,8 +21,10 @@ $(document).ready(function() {
       url: "/searchMovies",
       type: "post",
       data: {title: query}
-    }).done(function(){
+    }).done(function(data){
       console.log("searching Rotten Tomatoes")
+      // debugger
+      $('#ajax-results').html("<div>" + data + "</div>")
     })
   });
 });

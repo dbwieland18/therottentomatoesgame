@@ -2,6 +2,7 @@ require 'sinatra'
 require 'rubygems'
 require 'rottentomatoes'
 require 'pry'
+require 'json'
 include RottenTomatoes
 enable :sessions
 
@@ -15,10 +16,10 @@ get '/' do
 end
 
 post '/searchMovies' do
-  @movies = RottenMovie.find(:title => params["title"], :limit => 3)
-  binding.pry
   @upcoming_game = session
-  erb :index
+  # binding.pry
+  @movies = RottenMovie.find(:title => params["title"], :limit => 3).to_json
+  # erb :index
 end
 
 post '/addToGame' do

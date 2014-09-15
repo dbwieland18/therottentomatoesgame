@@ -8,6 +8,7 @@
   <input id="search" type="submit">
 </form>
 <div id="search-results">
+  <div id="ajax-results"></div>
   <% if @movies %>
     <% if @movies.is_a?(Array) && !@movies.empty? %> <!-- for multiple results (array) -->
       <ul id="possible-matches-list">
