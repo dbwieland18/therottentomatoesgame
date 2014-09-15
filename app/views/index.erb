@@ -5,11 +5,11 @@
 </head>
 <form action="/searchMovies" method="post">
   <input type="text" name="title">
-  <input type="submit">
+  <input id="search" type="submit">
 </form>
 <div id="search-results">
   <% if @movies %>
-    <% if @movies.is_a?(Array) %> <!-- for multiple results -->
+    <% if @movies.is_a?(Array) && !@movies.empty? %> <!-- for multiple results (array) -->
       <ul id="possible-matches-list">
         <% @movies.each do |movie| %>
           <li style="list-style-none:none;">
@@ -22,7 +22,7 @@
           </li>
         <% end %>
       </ul>
-    <% elsif @movies.title %> <!-- for single result -->
+    <% elsif !@movies.is_a?(Array) %> <!-- for single result (patched open struct) -->
       <div id="single-result">
         <img src=<%=@movies.posters.thumbnail%>>
         <h3 style="display:inline;"><%= @movies.title %></h3>
@@ -31,7 +31,7 @@
         <% end %>
         <h3><%= @movies.year %></h3><button class="add">add to game</button>
       </div>
-    <% else %> <!-- for no results -->
+    <% else %> <!-- for no results (empty array) -->
       <h2>No matching movies found!</h2>
     <% end %>
   <% end %>

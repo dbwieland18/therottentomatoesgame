@@ -15,7 +15,8 @@ get '/' do
 end
 
 post '/searchMovies' do
-  @movies = RottenMovie.find(:title => params[:title], :limit => 3)
+  @movies = RottenMovie.find(:title => params["title"], :limit => 3)
+  binding.pry
   @upcoming_game = session
   erb :index
 end

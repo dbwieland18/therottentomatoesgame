@@ -14,4 +14,16 @@ $(document).ready(function() {
     });
     // $(this).fadeOut();
   });
+
+  $('#search').on('click', function(e){
+    e.preventDefault();
+    var query = $(this).siblings().val();
+    $.ajax({
+      url: "/searchMovies",
+      type: "post",
+      data: {title: query}
+    }).done(function(){
+      console.log("searching Rotten Tomatoes")
+    })
+  });
 });
