@@ -40,8 +40,13 @@ $(document).ready(function() {
   });
 
   $('#start-game').on('click', function() {
-    $('#mov-ids').val($('#upcoming-game').attr("data-id-1"));
-    debugger
+    var element = $('#upcoming-game');
+    var gameSet = []
+    $(element[0].attributes).each(function(){
+      console.log(this.value);
+      gameSet.push(this.value)
+    });
+    $('#mov-ids').val(gameSet);
   });
 });
 

@@ -56,6 +56,7 @@ post '/addToGame' do
 end
 
 post '/start' do
+  @ids = params["movies"].split(",")[1..-1].map {|id| id.to_i }
   # binding.pry
   # render new view
 end
