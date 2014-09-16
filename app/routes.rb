@@ -10,26 +10,46 @@ enable :sessions
 Rotten.api_key = "pddzts5bbcxpagtke4q5b6cn"
 
 get '/' do
-  # binding.pry
   @upcoming_game = session
   erb :index
 end
 
 post '/searchMovies' do
   @upcoming_game = session
-  # binding.pry
-  @movies = RottenMovie.find(:title => params["title"], :limit => 3).to_json
-  # erb :index
+  filtered_results = []
+  movies = RottenMovie.find(:title => params["title"], :limit => 3) # array of 3 patched open structs
+  
+  if movies.is_a?(Array)
+    movies.each do |movie|
+      result = {}
+
+      result["title"]  = movie.title
+      result["year"]   = movie.year
+      result["actors"] = movie.abridged_cast.map {|actor| actor.name}
+      result["rating"] = movie.ratings.critics_score
+      result["image"]  = movie.posters.thumbnail
+      result["id"]     = movie.id
+
+      filtered_results << result
+    end
+  else
+    result = {}
+
+    result["title"]  = movies.title
+    result["year"]   = movies.year
+    result["actors"] = movies.abridged_cast.map {|actor| actor.name}
+    result["rating"] = movies.ratings.critics_score
+    result["image"]  = movies.posters.thumbnail
+
+    filtered_results << result
+  end
+
+  JSON.generate(filtered_results)
 end
 
 post '/addToGame' do
   # binding.pry
   session[params[:movieTitle]] = params[:movieId]
+  # session.to_a
 end
 
-# title       => @movie.title
-# year        => @movie.year
-# main actors => @movie.abridged_cast.each {|actor| puts actor.name }
-# rating      => @movie.ratings.critics_score
-# image       => @movie.posters.thumbnail (gives back a string url to the image)
-# synopsis (if there is one, which there is NOT always) => @movie.synopsis
