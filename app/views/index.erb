@@ -39,14 +39,24 @@
     <% end %>
   <% end %>
 </div>
-<div id="scores">
-  <h2>Player 1</h2>
-  <input type="text" name="score1"><span id="p1-score"></span>
-  <br>
-  <button>submit scores</button>
-</div>
 <div id="upcoming-game">
+  <h2>Upcoming Game</h2>
   <% @upcoming_game.each do |thing| %>
     <%= thing %>
   <% end %>
 </div>
+<form action="/start" method="post">
+  <input type="hidden" id="mov-ids" name="movies">
+  <button id="start-game" type="submit" value="">START GAME!</button>
+</form>
+<form action="/" method="get">
+  <input id="search" type="submit" value="restart">
+</form>
+
+
+
+
+
+
+
+

@@ -10,6 +10,7 @@ enable :sessions
 Rotten.api_key = "pddzts5bbcxpagtke4q5b6cn"
 
 get '/' do
+  session.clear
   @upcoming_game = session
   erb :index
 end
@@ -40,6 +41,7 @@ post '/searchMovies' do
     result["actors"] = movies.abridged_cast.map {|actor| actor.name}
     result["rating"] = movies.ratings.critics_score
     result["image"]  = movies.posters.thumbnail
+    result["id"]     = movies.id
 
     filtered_results << result
   end
@@ -52,4 +54,26 @@ post '/addToGame' do
   session[params[:movieTitle]] = params[:movieId]
   # session.to_a
 end
+
+post '/start' do
+  # binding.pry
+  # render new view
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
