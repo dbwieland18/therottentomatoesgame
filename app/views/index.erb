@@ -41,9 +41,6 @@
 </div>
 <div id="upcoming-game">
   <h2>Upcoming Game</h2>
-  <% @upcoming_game.each do |thing| %>
-    <%= thing %>
-  <% end %>
 </div>
 <form action="/start" method="post">
   <input type="hidden" id="mov-ids" name="movies">

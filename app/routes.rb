@@ -11,54 +11,50 @@ Rotten.api_key = "pddzts5bbcxpagtke4q5b6cn"
 
 get '/' do
   session.clear
-  @upcoming_game = session
   erb :index
 end
 
 post '/searchMovies' do
-  @upcoming_game = session
   filtered_results = []
   movies = RottenMovie.find(:title => params["title"], :limit => 3) # array of 3 patched open structs
   
   if movies.is_a?(Array)
     movies.each do |movie|
-      result = {}
-
-      result["title"]  = movie.title
-      result["year"]   = movie.year
-      result["actors"] = movie.abridged_cast.map {|actor| actor.name}
-      result["rating"] = movie.ratings.critics_score
-      result["image"]  = movie.posters.thumbnail
-      result["id"]     = movie.id
-
-      filtered_results << result
+      filtered_results << rt_movie_to_json(movie)
     end
   else
-    result = {}
-
-    result["title"]  = movies.title
-    result["year"]   = movies.year
-    result["actors"] = movies.abridged_cast.map {|actor| actor.name}
-    result["rating"] = movies.ratings.critics_score
-    result["image"]  = movies.posters.thumbnail
-    result["id"]     = movies.id
-
-    filtered_results << result
+    filtered_results << rt_movie_to_json(movies)
   end
 
   JSON.generate(filtered_results)
 end
 
 post '/addToGame' do
-  # binding.pry
   session[params[:movieTitle]] = params[:movieId]
-  # session.to_a
+  binding.pry
 end
 
 post '/start' do
-  @ids = params["movies"].split(",")[1..-1].map {|id| id.to_i }
-  # binding.pry
-  # render new view
+  @ids = params["movies"].split(",")[1..-1].map {|id| id.to_i } # turn string into array, ignore first element, turn into integers
+  @first_movie = RottenMovie.find(:id => @ids.first)
+  erb :play_game
+end
+
+post 'getNextMovie' do
+  
+end
+
+# ---------- helper methods ---------- #
+
+def rt_movie_to_json(movie)
+  result = {}
+  result["title"]  = movie.title
+  result["year"]   = movie.year
+  result["actors"] = movie.abridged_cast.map {|actor| actor.name}
+  result["rating"] = movie.ratings.critics_score
+  result["image"]  = movie.posters.thumbnail
+  result["id"]     = movie.id
+  result
 end
 
 

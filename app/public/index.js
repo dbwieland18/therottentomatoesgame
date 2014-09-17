@@ -1,25 +1,5 @@
 $(document).ready(function() {
-  var movieCount = 0
-  $('#search-results').on('click', 'button.add', function(){
-    movieCount ++
-    var id = $(this).attr('data-movieid');
-    var title = $(this).attr('data-title');
-    $.ajax({
-      url: "/addToGame",
-      type: "post",
-      data: {movieId: id, movieTitle: title}
-    }).done(function(data){
-      console.log("request made?");
-      // updateUpcomingGame(); //this function should update the relevant div with data from the session
-      // maybe make a partial for this section?
-      // debugger
-      $('#upcoming-game').attr("data-id-" + movieCount, data)
-    });
-    $('#upcoming-game').append($(this).siblings('img').clone())
-    $(this).siblings().fadeOut();
-    $(this).fadeOut();
-  });
-
+  // shows RT search results
   $('#search').on('click', function(e){
     e.preventDefault();
     var query = $(this).siblings().val();
@@ -39,6 +19,19 @@ $(document).ready(function() {
     })
   });
 
+  // adds movie id to upcoming game, UI responds
+  var movieCount = 0
+  $('#search-results').on('click', 'button.add', function(){
+    movieCount ++
+    var id = $(this).attr('data-movieid');
+    var title = $(this).attr('data-title');
+    $('#upcoming-game').attr("data-id-" + movieCount, id)
+    $('#upcoming-game').append($(this).siblings('img').clone())
+    $(this).siblings().fadeOut();
+    $(this).fadeOut();
+  });
+
+  // grabs movie ids for upcoming game, puts them in form being submitted
   $('#start-game').on('click', function() {
     var element = $('#upcoming-game');
     var gameSet = []
@@ -49,9 +42,3 @@ $(document).ready(function() {
     $('#mov-ids').val(gameSet);
   });
 });
-
-// for getting all attributes...
-
-// var element = $("span[name='test']");
-// $(element[0].attributes).each(function() {
-// console.log(this.nodeName+':'+this.nodeValue);});

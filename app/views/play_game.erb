@@ -1,0 +1,16 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/game.js"></script>
+</head>
+<body>
+  <div id="id-holder" style="visibility:hidden;"><%= @ids %></div>
+  <span id="critics-score" style="display:none;" data-score=<%= @first_movie.ratings.critics_score %>><%= @first_movie.ratings.critics_score %></span>
+  <div id="current-movie">
+    <img src="<%= @first_movie.posters.thumbnail %>">
+  </div>
+  <button style="display:none" id="next-movie">next movie</button><br>
+  <h2 style="display:inline;">player 1</h2><input id="p1-guess"><span id="p1-score">0</span><br>
+  <h2 style="display:inline;">player 2</h2><input id="p2-guess"><span id="p2-score">0</span><br> 
+  <h2 style="display:inline;">player 3</h2><input id="p3-guess"><span id="p3-score">0</span><br>
+  <button id="submit-guesses">submit</button> 
+</body>
