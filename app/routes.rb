@@ -40,8 +40,9 @@ post '/start' do
   erb :play_game
 end
 
-post 'getNextMovie' do
-  
+post '/getNextMovie' do
+  next_id = params["next"][0].to_i
+  JSON.generate([rt_movie_to_json(RottenMovie.find(:id => next_id))])
 end
 
 # ---------- helper methods ---------- #

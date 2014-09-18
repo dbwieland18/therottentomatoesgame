@@ -27,15 +27,42 @@ $(document).ready(function() {
         $('#p'+ num + '-score').html(critics-guess)
       }
     });
-    $('#p1-guess').val("");
-    $('#p2-guess').val("");
-    $('#p3-guess').val("");
     $('#critics-score').show();
     $('#submit-guesses').hide();
     $('#next-movie').show();
   });
 
+  // showing/hiding buttons, loading next movie
   $('body').on('click', '#next-movie', function() {
-    console.log('moving on...')
+    // console.log('moving on...')
+    $('#next-movie').hide();
+    $('#submit-guesses').show();
+    $('#critics-score').hide();
+    $('#p1-guess').val("");
+    $('#p2-guess').val("");
+    $('#p3-guess').val("");
+    $.ajax({
+      url: "/getNextMovie",
+      type: "post",
+      data: {"next": movies}
+    }).done(function(data){
+      var nextMovie = $.parseJSON(data)
+      $('#current-movie img').attr('src', nextMovie[0].image)
+      $('#critics-score').attr('data-score', nextMovie[0].rating)
+      $('#critics-score').text(nextMovie[0].rating)
+    });
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
