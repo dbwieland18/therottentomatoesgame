@@ -31,7 +31,6 @@ end
 
 post '/addToGame' do
   session[params[:movieTitle]] = params[:movieId]
-  binding.pry
 end
 
 post '/start' do
