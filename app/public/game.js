@@ -17,14 +17,15 @@ $(document).ready(function() {
 
     $.each([p1Guess, p2Guess, p3Guess], function(index, guess) {
       var num = index + 1
+      var current_score = parseInt($('#p'+ num + '-score').text())
       if (guess > critics) {
-        $('#p'+ num + '-score').html(guess-critics)
+        $('#p'+ num + '-score').html(current_score + (guess-critics))
       }
       else if (guess == critics) {
-        $('#p'+ num + '-score').html(parseInt($('#p'+ num + '-score').text()) - 5) 
+        $('#p'+ num + '-score').html(current_score - 5) 
       }
       else {
-        $('#p'+ num + '-score').html(critics-guess)
+        $('#p'+ num + '-score').html(current_score + (critics-guess))
       }
     });
     $('#critics-score').show();
