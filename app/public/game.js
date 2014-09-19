@@ -1,6 +1,6 @@
-// extend base JS array class with super simple max function
-Array.max = function( array ){
-  return Math.max.apply( Math, array );
+// extend base JS array class with super simple min function
+Array.min = function( array ){
+  return Math.min.apply( Math, array );
 };
 
 $(document).ready(function() {
@@ -16,11 +16,6 @@ $(document).ready(function() {
     var p2Guess = parseInt($('#p2-guess').val());
     var p3Guess = parseInt($('#p3-guess').val());
 
-    var p1Score = parseInt($('#p1-score').val());
-    var p2Score = parseInt($('#p2-score').val());
-    var p3Score = parseInt($('#p3-score').val());
-    var scores = [p1Score,p2Score,p3Score]
-
     $.each([p1Guess, p2Guess, p3Guess], function(index, guess) {
       var num = index + 1
       var current_score = parseInt($('#p'+ num + '-score').text())
@@ -35,10 +30,21 @@ $(document).ready(function() {
       }
     });
 
+    var p1Score = parseInt($('#p1-score').text());
+    var p2Score = parseInt($('#p2-score').text());
+    var p3Score = parseInt($('#p3-score').text());
+    var scores = [p1Score,p2Score,p3Score]
+    var currentLeader = setLeader(scores);
+    debugger;
+
     $('#critics-score').show();
     $('#submit-guesses').hide();
     $('#next-movie').show();
   });
+
+  var setLeader = function(scores) {
+    return Array.min(scores)
+  } 
 
   // showing/hiding buttons, loading next movie
   $('body').on('click', '#next-movie', function() {
