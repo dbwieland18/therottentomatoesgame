@@ -1,4 +1,5 @@
 <head>
+  <link href="/foundation.min.css" rel="stylesheet" />
   <link href="/index.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="/index.js"></script>
@@ -9,35 +10,9 @@
 </form>
 <div id="search-results">
   <div id="ajax-results"></div>
+  <!-- insert ajax movie results -->
   <ul id="possible-matches-list">
   </ul>
-  <% if @movies %>
-    <% if @movies.is_a?(Array) && !@movies.empty? %> <!-- for multiple results (array) -->
-      <ul id="possible-matches-list">
-        <% @movies.each do |movie| %>
-          <li style="list-style-none:none;">
-            <img src=<%=movie.posters.thumbnail%>>
-            <h3><%= movie.title %></h3>
-            <% movie.abridged_cast.each do |actor| %>
-              <%= actor.name %>
-            <% end %>
-            <h3><%= movie.year %></h3><button class="add" data-title=<%= movie.title %> data-movieId=<%= movie.id %>>add to game</button>
-          </li>
-        <% end %>
-      </ul>
-    <% elsif !@movies.is_a?(Array) %> <!-- for single result (patched open struct) -->
-      <div id="single-result">
-        <img src=<%=@movies.posters.thumbnail%>>
-        <h3 style="display:inline;"><%= @movies.title %></h3>
-        <% @movies.abridged_cast.each do |actor| %>
-          <%= actor.name %>
-        <% end %>
-        <h3><%= @movies.year %></h3><button class="add">add to game</button>
-      </div>
-    <% else %> <!-- for no results (empty array) -->
-      <h2>No matching movies found!</h2>
-    <% end %>
-  <% end %>
 </div>
 <div id="upcoming-game">
   <h2>Upcoming Game</h2>

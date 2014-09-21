@@ -7,6 +7,7 @@ $(document).ready(function() {
   var movies = JSON.parse($('#id-holder').text());
   movies.shift();
   console.log(movies)
+  var p1Score, p2Score, p3Score, currentLeader
 
   // handle updating scores, showing critics score, showing/hiding buttons
   $('#submit-guesses').on('click', function() { 
@@ -30,46 +31,57 @@ $(document).ready(function() {
       }
     });
 
-    var p1Score = parseInt($('#p1-score').text());
-    var p2Score = parseInt($('#p2-score').text());
-    var p3Score = parseInt($('#p3-score').text());
+    p1Score = parseInt($('#p1-score').text());
+    p2Score = parseInt($('#p2-score').text());
+    p3Score = parseInt($('#p3-score').text());
     var scores = [p1Score,p2Score,p3Score]
-    var currentLeader = setLeader(scores);
-    debugger;
-
+    currentLeader = setLeader(scores);
     $('#critics-score').show();
     $('#submit-guesses').hide();
     $('#next-movie').show();
+    checkForEnd();
   });
 
+  var checkForEnd = function() {
+    if (movies.length == 0) {
+      $('#current-movie').append(currentLeader);
+      $("#restart-button").show();
+      $("#next-movie").hide(); 
+    }
+  }
+
   var setLeader = function(scores) {
-    return Array.min(scores)
+    var lowScore = Array.min(scores)
+    if (p1Score == lowScore) {
+      return "<h1>player 1 wins with a score of " + lowScore + "!</h1>"
+    }
+    else if (p2Score == lowScore) {
+      return "<h1>player 2 wins with a score of " + lowScore + "!</h1>"
+    }
+    else if (p3Score == lowScore) {
+      return "<h1>player 3 wins with a score of " + lowScore + "!</h1>"
+    }
   } 
 
   // showing/hiding buttons, loading next movie
   $('body').on('click', '#next-movie', function() {
     // console.log('moving on...')
-    if (movies.length == 0) {
-      $('#current-movie').append("<h1>We have a winner!</h1>")
-    }
-    else {
-      $('#submit-guesses').show();
-      $('#critics-score').hide();
-      $('#p1-guess').val("");
-      $('#p2-guess').val("");
-      $('#p3-guess').val("");
-      $.ajax({
-        url: "/getNextMovie",
-        type: "post",
-        data: {"next": movies}
-      }).done(function(data){
-        var nextMovie = $.parseJSON(data)
-        $('#current-movie img').attr('src', nextMovie[0].image)
-        $('#critics-score').attr('data-score', nextMovie[0].rating)
-        $('#critics-score').text(nextMovie[0].rating)
-        movies.shift();
-      });
-    }
+    $('#submit-guesses').show();
+    $('#critics-score').hide();
+    $('#p1-guess').val("");
+    $('#p2-guess').val("");
+    $('#p3-guess').val("");
+    $.ajax({
+      url: "/getNextMovie",
+      type: "post",
+      data: {"next": movies}
+    }).done(function(data){
+      var nextMovie = $.parseJSON(data);
+      $('#current-movie img').attr('src', nextMovie[0].image);
+      $('#critics-score').attr('data-score', nextMovie[0].rating);
+      $('#critics-score').text(nextMovie[0].rating);
+      movies.shift();
+    });
     $('#next-movie').hide();
   });
 });
