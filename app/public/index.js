@@ -2,7 +2,7 @@ $(document).ready(function() {
   // shows RT search results
   $('#search').on('click', function(e){
     e.preventDefault();
-    var query = $(this).siblings().val();
+    var query = $('.form-control').val();
     $.ajax({
       url: "/searchMovies",
       type: "post",
@@ -12,7 +12,7 @@ $(document).ready(function() {
       var movies = $.parseJSON(data)
       html = ""
       $.each(movies, function(index, value){
-        html += "<li><img src=" + value.image + "><h3>" + value.title + "</h3><span>" + value.actors + "</span><h3>" + value.year + "</h3><button class='add' data-title=" + value.title + " data-movieId=" + value.id + ">add to game</button>"
+        html += "<li><img src=" + value.image + "><h3>" + value.title + "</h3><span>" + value.actors + "</span><h3>" + value.year + "</h3><button class='add btn-default' data-title=" + value.title + " data-movieId=" + value.id + ">add to game</button>"
       });
       // debugger
       $('#possible-matches-list').html(html)
@@ -29,6 +29,7 @@ $(document).ready(function() {
     $('#upcoming-game').append($(this).siblings('img').clone())
     $(this).siblings().fadeOut();
     $(this).fadeOut();
+    $('#start-game').show();
   });
 
   // grabs movie ids for upcoming game, puts them in form being submitted
