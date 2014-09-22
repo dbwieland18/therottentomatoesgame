@@ -31,7 +31,7 @@
 
   <div class="row">
     <div class="col-md-8">
-      <div class="panel panel-success">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h4>Upcoming Game</h4>
         </div>
@@ -42,8 +42,18 @@
         <div class="panel-footer">
           <form action="/start" method="post">
             <input type="hidden" id="mov-ids" name="movies">
-            <button style="display:none;" class="btn btn-success" id="start-game" type="submit" value="">START GAME!</button>
+            <button style="display:none;" class="btn btn-primary" id="start-game" type="submit" value="">START GAME!</button>
           </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4>How to Play</h4>
+        </div>
+        <div id="instructions">
+          <p>Get started by using the search field above to find movies on Rotten Tomatoes and add them to your game. Try themes like "football movies," "Tom Hanks movies," or "attack crows." When you're ready, click "start game" to proceed to gameplay. The button below clears your selections and starts the process over.</p>
         </div>
       </div>
     </div>
