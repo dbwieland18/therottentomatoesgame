@@ -22,7 +22,7 @@ $(document).ready(function() {
       var movies = $.parseJSON(data)
       html = ""
       $.each(movies, function(index, value){
-        html += "<li class='singleResult'><img src=" + value.image + "><h3>" + " " + value.title + " " + "</h3><span><i>" + value.actors + " " + "</i></span><h3>" + value.year + "</h3><button class='add btn btn-primary pull-right' data-title=" + value.title + " data-movieId=" + value.id + ">add to game</button>"
+        html += "<li class='singleResult'><img src=" + value.image + "><h3>" + " " + value.title + " " + "</h3><span><i>" + value.actors + " " + "</i></span><h3>" + value.year + "</h3><button class='add btn btn-primary pull-right' data-title=" + value.title + " data-movieId=" + value.id + ">add to game <span class='glyphicon glyphicon-plus'></span></button>"
       });
       // debugger
       $('#possible-matches-list').html(html)
