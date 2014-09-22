@@ -17,7 +17,6 @@ end
 post '/searchMovies' do
   filtered_results = []
   movies = RottenMovie.find(:title => params["title"], :limit => 3) # array of 3 patched open structs
-  
   if movies.is_a?(Array)
     movies.each do |movie|
       filtered_results << rt_movie_to_json(movie)
@@ -52,7 +51,7 @@ def rt_movie_to_json(movie)
   result["year"]   = movie.year
   result["actors"] = movie.abridged_cast.map {|actor| actor.name}
   result["rating"] = movie.ratings.critics_score
-  result["image"]  = movie.posters.thumbnail
+  result["image"]  = movie.posters.original
   result["id"]     = movie.id
   result
 end

@@ -17,7 +17,7 @@
           <button class="btn btn-default" id="search" type="submit">Find Movie</button>
         </form>
       </span>
-      <input type="text" class="form-control" name="title">
+      <input type="text" class="form-control" name="title" id="searchInput" placeholder="enter movie title here to find it on RottenTomatoes!">
     </div>  
 
 
@@ -29,24 +29,28 @@
     </div>
   </div>
 
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h4>Upcoming Game</h4>
-    </div>
-    <div class="panel-body">
-      <div id="upcoming-game">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h4>Upcoming Game</h4>
+        </div>
+        <div class="panel-body">
+          <div id="upcoming-game">
+          </div>
+        </div>
+        <div class="panel-footer">
+          <form action="/start" method="post">
+            <input type="hidden" id="mov-ids" name="movies">
+            <button style="display:none;" class="btn btn-success" id="start-game" type="submit" value="">START GAME!</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="panel-footer">
-      <form action="/start" method="post">
-        <input type="hidden" id="mov-ids" name="movies">
-        <button style="display:none;" class="btn-success" id="start-game" type="submit" value="">START GAME!</button>
-      </form>
     </div>
   </div>
 
   <form action="/" method="get" class="pull-right">
-        <input id="restart" type="submit" value="restart movie selection">
+    <button class="btn btn-default" id="restart" type="submit">restart movie selection</button>
   </form>
 </div>
 

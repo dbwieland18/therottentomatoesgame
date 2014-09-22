@@ -10,3 +10,15 @@
   display:inline;
 }
 
+#loader {
+  display: block;
+  margin: 30px auto;
+}
+
+.singleResult {
+  margin: 20px 0;
+}
+
+#upcoming-game img {
+  margin-right:20px;
+}
