@@ -11,6 +11,24 @@ $(document).ready(function() {
 
   // handle updating scores, showing critics score, showing/hiding buttons
   $('#submit-guesses').on('click', function() { 
+    // validate no inputs blank
+
+    var anyBlank = false;
+    var inputs = [$('#p1-guess').val(), $('#p2-guess').val(), $('#p3-guess').val()];
+    $.each(inputs, function(index, value) {
+      // debugger;
+      if (value == "") {
+        anyBlank = true;
+        return false;
+      }
+    })
+
+    if (anyBlank == true) {
+      alert("please enter a guess for each player")
+      return false;
+    }
+
+    // validate 
     var critics = $('#critics-score').attr('data-score');
 
     var p1Guess = parseInt($('#p1-guess').val());
