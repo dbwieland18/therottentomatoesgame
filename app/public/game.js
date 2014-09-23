@@ -11,8 +11,8 @@ $(document).ready(function() {
 
   // handle updating scores, showing critics score, showing/hiding buttons
   $('#submit-guesses').on('click', function() { 
-    // validate no inputs blank
 
+    // validate no inputs blank or NaN
     var anyInvalid = false;
     var inputs = [$('#p1-guess').val(), $('#p2-guess').val(), $('#p3-guess').val()];
     $.each(inputs, function(index, value) {
@@ -49,9 +49,9 @@ $(document).ready(function() {
       }
     });
 
-    p1Score = parseInt($('#p1-score').text());
-    p2Score = parseInt($('#p2-score').text());
-    p3Score = parseInt($('#p3-score').text());
+    p1Score = ["p1",parseInt($('#p1-score').text())];
+    p2Score = ["p2",parseInt($('#p2-score').text())];
+    p3Score = ["p3",parseInt($('#p3-score').text())];
     var scores = [p1Score,p2Score,p3Score]
     currentLeader = setLeader(scores);
     $('#critics-score').slideDown();
@@ -69,15 +69,30 @@ $(document).ready(function() {
   }
 
   var setLeader = function(scores) {
-    var lowScore = Array.min(scores)
-    if (p1Score == lowScore) {
-      return "<h1>player 1 wins with a score of " + lowScore + "!</h1>"
+    var lowScore = Array.min($.map(scores, function(val, i) { return val[1] }))
+    var leaders = []
+
+    //handles situation of a two or three way tie
+    $.each([p1Score, p2Score, p3Score], function(index, score) {
+      if (score[1] == lowScore) {
+        leaders.push(score);
+      }
+    });
+    
+    if (leaders.length === 1) {
+      if (p1Score[1] == lowScore) {
+        return "<h1>player 1 wins with a score of " + lowScore + "!</h1>"
+      }
+      else if (p2Score[1] == lowScore) {
+        return "<h1>player 2 wins with a score of " + lowScore + "!</h1>"
+      }
+      else if (p3Score[1] == lowScore) {
+        return "<h1>player 3 wins with a score of " + lowScore + "!</h1>"
+      }
     }
-    else if (p2Score == lowScore) {
-      return "<h1>player 2 wins with a score of " + lowScore + "!</h1>"
-    }
-    else if (p3Score == lowScore) {
-      return "<h1>player 3 wins with a score of " + lowScore + "!</h1>"
+    else {
+      var winners = $.map(leaders, function(val, i) { return val[0] }).join(" and ")
+      return "<h2>" + winners + " tied for the win with a score of " + lowScore + "!</h2>"
     }
   } 
 
