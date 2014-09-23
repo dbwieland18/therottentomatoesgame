@@ -12,7 +12,7 @@ h3 {
   color: green;
 }
 
-#submit-guesses {
+.big-button {
   margin-top: 150px;
   width: 300px;
   height: 80px;
