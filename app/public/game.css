@@ -11,3 +11,10 @@ h3 {
   font-size: 80px;
   color: green;
 }
+
+#submit-guesses {
+  margin-top: 150px;
+  width: 300px;
+  height: 80px;
+  font-size: 30px;
+}
