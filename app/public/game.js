@@ -36,7 +36,7 @@ $(document).ready(function() {
     p3Score = parseInt($('#p3-score').text());
     var scores = [p1Score,p2Score,p3Score]
     currentLeader = setLeader(scores);
-    $('#critics-score').fadeIn();
+    $('#critics-score').slideDown();
     $('#submit-guesses').hide();
     $('#next-movie').show();
     checkForEnd();
@@ -79,7 +79,7 @@ $(document).ready(function() {
     }).done(function(data){
       var nextMovie = $.parseJSON(data);
       $('#loader').hide();
-      $('#movie-info').show();
+      $('#movie-info').fadeIn();
       $('.jumbotron h1').html(nextMovie[0].title)
       $('#current-movie img').attr('src', nextMovie[0].image);
       $('#current-movie #actors').html("<i>" + nextMovie[0].actors.join(', ') + "</i>")
