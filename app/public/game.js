@@ -13,18 +13,18 @@ $(document).ready(function() {
   $('#submit-guesses').on('click', function() { 
     // validate no inputs blank
 
-    var anyBlank = false;
+    var anyInvalid = false;
     var inputs = [$('#p1-guess').val(), $('#p2-guess').val(), $('#p3-guess').val()];
     $.each(inputs, function(index, value) {
       // debugger;
-      if (value == "") {
-        anyBlank = true;
+      if (value == "" || isNaN(value)) {
+        anyInvalid = true;
         return false;
       }
     })
 
-    if (anyBlank == true) {
-      alert("please enter a guess for each player")
+    if (anyInvalid == true) {
+      alert("please enter a numeric guess for each player")
       return false;
     }
 
