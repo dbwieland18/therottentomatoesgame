@@ -36,7 +36,7 @@ $(document).ready(function() {
     p3Score = parseInt($('#p3-score').text());
     var scores = [p1Score,p2Score,p3Score]
     currentLeader = setLeader(scores);
-    $('#critics-score').show();
+    $('#critics-score').fadeIn();
     $('#submit-guesses').hide();
     $('#next-movie').show();
     checkForEnd();
@@ -65,19 +65,25 @@ $(document).ready(function() {
 
   // showing/hiding buttons, loading next movie
   $('body').on('click', '#next-movie', function() {
-    // console.log('moving on...')
+    $('#movie-info').hide();
     $('#submit-guesses').show();
     $('#critics-score').hide();
     $('#p1-guess').val("");
     $('#p2-guess').val("");
     $('#p3-guess').val("");
+    $('#loader').show();
     $.ajax({
       url: "/getNextMovie",
       type: "post",
       data: {"next": movies}
     }).done(function(data){
       var nextMovie = $.parseJSON(data);
+      $('#loader').hide();
+      $('#movie-info').show();
+      $('.jumbotron h1').html(nextMovie[0].title)
       $('#current-movie img').attr('src', nextMovie[0].image);
+      $('#current-movie #actors').html("<i>" + nextMovie[0].actors.join(', ') + "</i>")
+      $('#current-movie #year').html(nextMovie[0].year)
       $('#critics-score').attr('data-score', nextMovie[0].rating);
       $('#critics-score').text(nextMovie[0].rating);
       movies.shift();

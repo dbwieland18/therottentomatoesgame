@@ -1,0 +1,13 @@
+#loader {
+  display: block;
+  margin: 30px auto;
+}
+
+h3 {
+  display: inline;
+}
+
+#critics-score {
+  font-size: 80px;
+  color: green;
+}
