@@ -13,14 +13,13 @@ h3 {
 }
 
 .big-button {
-  margin-top: 250px;
   width: 300px;
   height: 80px;
   font-size: 30px;
 }
 
 #input-group-1, #input-group-2, #input-group-3 {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 
 .input-group, .form-control {
@@ -36,4 +35,8 @@ h3 {
 .alert {
   margin: 0 auto;
   width: 200px;
+}
+
+.player {
+  margin-bottom: 20px;
 }
