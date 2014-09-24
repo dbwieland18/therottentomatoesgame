@@ -40,15 +40,15 @@ $(document).ready(function() {
       var current_score = parseInt($('#p'+ num + '-score').text())
       if (guess > critics) {
         $('#p'+ num + '-score').html(current_score + (guess-critics))
-        $('#input-group-' + num).after("<br><div class='alert alert-warning' role='alert'>off by (+" + (guess-critics) + ")</div>")
+        $('#input-group-' + num).after("<div class='alert alert-warning' role='alert'>off by (+" + (guess-critics) + ")</div>")
       }
       else if (guess == critics) {
         $('#p'+ num + '-score').html(current_score - 5) 
-        $('#input-group-' + num).after("<br><div class='alert alert-success' role='alert'>CORRECT!</div>")
+        $('#input-group-' + num).after("<div class='alert alert-success' role='alert'>CORRECT!</div>")
       }
       else {
         $('#p'+ num + '-score').html(current_score + (critics-guess))
-        $('#input-group-' + num).after("<br><div class='alert alert-warning' role='alert'>off by (-" + (critics-guess) + ")</div>")
+        $('#input-group-' + num).after("<div class='alert alert-warning' role='alert'>off by (-" + (critics-guess) + ")</div>")
       }
     });
 
@@ -103,6 +103,7 @@ $(document).ready(function() {
   $('body').on('click', '#next-movie', function() {
     $('#movie-info').hide();
     $('#submit-guesses').show();
+    $('.alert').hide();
     $('#critics-score').hide();
     $('#p1-guess').val("");
     $('#p2-guess').val("");

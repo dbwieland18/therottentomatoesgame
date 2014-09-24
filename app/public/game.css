@@ -19,6 +19,10 @@ h3 {
   font-size: 30px;
 }
 
+#input-group-1, #input-group-2, #input-group-3 {
+  margin-top: 20px;
+}
+
 .input-group, .form-control {
   margin: 0 auto;
   width: 200px;
@@ -27,4 +31,9 @@ h3 {
 
 #p1-score, #p2-score, #p3-score {
   font-size: 30px;
+}
+
+.alert {
+  margin: 0 auto;
+  width: 200px;
 }
