@@ -18,3 +18,8 @@ h3 {
   height: 80px;
   font-size: 30px;
 }
+
+input {
+  display:block;
+  margin: 20px auto;
+}
