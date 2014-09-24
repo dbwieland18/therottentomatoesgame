@@ -25,15 +25,21 @@
       <div id="playing-area">
         <div class="col-md-4 text-center">
           <img src="/img/bryan.png">
-          <input id="p1-guess">current score:<span id="p1-score">0</span><br>
+          <div class="input-group" id="input-group-1">
+            <input type="text" class="form-control" id="p1-guess"><span class="input-group-addon">current score: <span id="p1-score">0</span></span>
+          </div>
         </div>
         <div class="col-md-4 text-center">
           <img src="/img/adam.png">
-          <input id="p2-guess">current score:<span id="p2-score">0</span><br> 
+          <div class="input-group" id="input-group-2">
+            <input type="text" class="form-control" id="p2-guess"><span class="input-group-addon">current score: <span id="p2-score">0</span></span>
+          </div>
         </div>
         <div class="col-md-4 text-center">
           <img src="/img/alison.png">
-          <input id="p3-guess">current score:<span id="p3-score">0</span><br>
+          <div class="input-group" id="input-group-3">
+            <input type="text" class="form-control" id="p3-guess"><span class="input-group-addon">current score: <span id="p3-score">0</span></span>
+          </div>
         </div>
       </div>
       <button class="center-block btn btn-primary big-button" id="submit-guesses">submit all guesses</button>

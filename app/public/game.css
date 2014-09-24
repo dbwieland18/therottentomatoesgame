@@ -19,7 +19,12 @@ h3 {
   font-size: 30px;
 }
 
-input {
-  display:block;
-  margin: 20px auto;
+.input-group, .form-control {
+  margin: 0 auto;
+  width: 200px;
+  height: 50px;
+}
+
+#p1-score, #p2-score, #p3-score {
+  font-size: 30px;
 }

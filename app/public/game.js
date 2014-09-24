@@ -40,12 +40,15 @@ $(document).ready(function() {
       var current_score = parseInt($('#p'+ num + '-score').text())
       if (guess > critics) {
         $('#p'+ num + '-score').html(current_score + (guess-critics))
+        $('#input-group-' + num).after("<br><div class='alert alert-warning' role='alert'>off by (+" + (guess-critics) + ")</div>")
       }
       else if (guess == critics) {
         $('#p'+ num + '-score').html(current_score - 5) 
+        $('#input-group-' + num).after("<br><div class='alert alert-success' role='alert'>CORRECT!</div>")
       }
       else {
         $('#p'+ num + '-score').html(current_score + (critics-guess))
+        $('#input-group-' + num).after("<br><div class='alert alert-warning' role='alert'>off by (-" + (critics-guess) + ")</div>")
       }
     });
 
