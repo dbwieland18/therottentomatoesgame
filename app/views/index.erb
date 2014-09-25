@@ -6,21 +6,24 @@
   <script src="/index.js"></script>
 </head>
 <div class="container">
-  <div class="page-header">
-    <h1>The Rotten Tomatoes Game<small> ... as heard on the Adam Carolla Show</small></h1>
-  </div>
-
-  <div class="well">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <form action="/searchMovies" method="post">
-          <button class="btn btn-default" id="search" type="submit">Find Movie</button>
-        </form>
-      </span>
-      <input type="text" class="form-control" name="title" id="searchInput" placeholder="enter movie title here to find it on RottenTomatoes!">
+  <div class="row">
+    <div class="col-md-3">
+      <img id="logo" src="/img/Rotten_Tomatoes_Logo.png">
     </div>  
+    <div class="col-md-9" id="search-column">
+      <h3 style="color:white;">... as heard on the Adam Carolla Show</h3>
+      <div class="input-group">
+        <input type="text" class="form-control" name="title" id="searchInput" placeholder="enter movie title here to find it on RottenTomatoes!">
+        <span class="input-group-btn">
+          <form action="/searchMovies" method="post">
+            <button class="btn btn-default" id="search" type="submit">Find Movie</button>
+          </form>
+        </span>
+      </div>
+    </div>
+  </div>  
 
-
+  <div class="well" id="results-holder" style="display:none;">
     <div id="search-results">
       <div id="ajax-results"></div>
       <!-- insert ajax movie results -->
@@ -53,14 +56,14 @@
           <h4>How to Play</h4>
         </div>
         <div id="instructions">
-          <p>Get started by using the search field above to find movies on Rotten Tomatoes and add them to your game. Try themes like "football movies," "Tom Hanks movies," or "attack crows." When you're ready, click "start game" to proceed to gameplay. The button below clears your selections and starts the process over.</p>
+          <p>Get started by using the search field above to find movies on Rotten Tomatoes and add them to your game. When you're ready, click "start game" to start guessing as your favorite host and see who comes out on top!</p>
         </div>
       </div>
     </div>
   </div>
 
   <form action="/" method="get" class="pull-right">
-    <button class="btn btn-default" id="restart" type="submit">restart movie selection</button>
+    <button class="btn btn-default" id="restart" type="submit">reset movie selection</button>
   </form>
 </div>
 

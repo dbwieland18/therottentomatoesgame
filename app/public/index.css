@@ -1,3 +1,7 @@
+body {
+  background-color: #A8D5F9;
+}
+
 #possible-matches-list {
   list-style-type: none;
 }
@@ -6,8 +10,8 @@
   display:inline;
 }
 
-#single-result h3 {
-  display:inline;
+h3 {
+  /*display:inline;*/
 }
 
 #loader {
@@ -25,4 +29,21 @@
 
 #instructions {
   padding: 20px;
+}
+
+#logo {
+  width: 100%;
+}
+
+#search-column {
+  margin:80 0 50px 0;
+}
+
+#searchInput {
+  height: 60px;
+  font-size: 20px;
+}
+
+#search {
+  height: 60px;
 }

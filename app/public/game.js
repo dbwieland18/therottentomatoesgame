@@ -52,9 +52,9 @@ $(document).ready(function() {
       }
     });
 
-    p1Score = ["p1",parseInt($('#p1-score').text())];
-    p2Score = ["p2",parseInt($('#p2-score').text())];
-    p3Score = ["p3",parseInt($('#p3-score').text())];
+    p1Score = ["Bryan",parseInt($('#p1-score').text())];
+    p2Score = ["Adam",parseInt($('#p2-score').text())];
+    p3Score = ["Alison",parseInt($('#p3-score').text())];
     var scores = [p1Score,p2Score,p3Score]
     currentLeader = setLeader(scores);
     $('#critics-score').slideDown();
@@ -84,13 +84,13 @@ $(document).ready(function() {
     
     if (leaders.length === 1) {
       if (p1Score[1] == lowScore) {
-        return "<h1>player 1 wins with a score of " + lowScore + "!</h1>"
+        return "<h1>Bryan wins with a score of " + lowScore + "!</h1>"
       }
       else if (p2Score[1] == lowScore) {
-        return "<h1>player 2 wins with a score of " + lowScore + "!</h1>"
+        return "<h1>Adam wins with a score of " + lowScore + "!</h1>"
       }
       else if (p3Score[1] == lowScore) {
-        return "<h1>player 3 wins with a score of " + lowScore + "!</h1>"
+        return "<h1>Alison wins with a score of " + lowScore + "!</h1>"
       }
     }
     else {

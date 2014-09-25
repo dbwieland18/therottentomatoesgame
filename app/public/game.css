@@ -1,3 +1,7 @@
+body {
+  background-color: #A8D5F9;
+}
+
 #loader {
   display: block;
   margin: 30px auto;

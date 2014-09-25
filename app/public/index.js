@@ -17,6 +17,7 @@ $(document).ready(function() {
       return false
     }
     else {
+      $('#results-holder').show();
       var query = $('.form-control').val();
       $('#possible-matches-list').html("<img src='http://www.baxcha.com/images/ajax-loader.gif' id='loader'/>")
       $.ajax({
@@ -47,6 +48,7 @@ $(document).ready(function() {
     $(this).siblings().fadeOut();
     $(this).fadeOut();
     $('#start-game').show();
+    $('#searchInput').val("");
   });
 
   // grabs movie ids for upcoming game, puts them in form being submitted
