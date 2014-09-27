@@ -3,11 +3,17 @@ Array.min = function( array ){
   return Math.min.apply( Math, array );
 };
 
+//$('.progress-bar').css("width", ((1/3)*100) + "%");
+
 $(document).ready(function() {
   var movies = JSON.parse($('#id-holder').text());
-  movies.shift();
-  console.log(movies)
+  var progressFull = movies.length
+  console.log(progressFull)
+  var progressPos = 1
   var p1Score, p2Score, p3Score, currentLeader
+
+  $('.progress-bar').css("width", ((progressPos/progressFull)*100) + "%");
+  movies.shift();
 
   // handle updating scores, showing critics score, showing/hiding buttons
   $('#submit-guesses').on('click', function() { 
@@ -40,15 +46,15 @@ $(document).ready(function() {
       var current_score = parseInt($('#p'+ num + '-score').text())
       if (guess > critics) {
         $('#p'+ num + '-score').html(current_score + (guess-critics))
-        $('#input-group-' + num).after("<div class='alert alert-warning' role='alert'>off by (+" + (guess-critics) + ")</div>")
+        $('#input-group-' + num).after("<div class='alert alert-warning offby' role='alert'>off by (+" + (guess-critics) + ")</div>")
       }
       else if (guess == critics) {
         $('#p'+ num + '-score').html(current_score - 5) 
-        $('#input-group-' + num).after("<div class='alert alert-success' role='alert'>CORRECT!</div>")
+        $('#input-group-' + num).after("<div class='alert alert-success offby' role='alert'>CORRECT!</div>")
       }
       else {
         $('#p'+ num + '-score').html(current_score + (critics-guess))
-        $('#input-group-' + num).after("<div class='alert alert-warning' role='alert'>off by (-" + (critics-guess) + ")</div>")
+        $('#input-group-' + num).after("<div class='alert alert-warning offby' role='alert'>off by (-" + (critics-guess) + ")</div>")
       }
     });
 
@@ -124,6 +130,8 @@ $(document).ready(function() {
       $('#critics-score').attr('data-score', nextMovie[0].rating);
       $('#critics-score').text(nextMovie[0].rating);
       movies.shift();
+      progressPos++
+      $('.progress-bar').css("width", ((progressPos/progressFull)*100) + "%");
     });
     $('#next-movie').hide();
   });

@@ -36,11 +36,17 @@ h3 {
   font-size: 30px;
 }
 
-.alert {
+.offby {
   margin: 0 auto;
   width: 200px;
 }
 
 .player {
   margin-bottom: 20px;
+}
+
+.gameplay {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
 }
