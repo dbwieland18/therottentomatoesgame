@@ -1,3 +1,11 @@
+.fb-button {
+  margin-top: 20px;
+}
+
+#twitter-button {
+  width: 50px;
+}
+
 body {
   background-color: #A8D5F9;
 }

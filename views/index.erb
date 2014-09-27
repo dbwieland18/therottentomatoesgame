@@ -4,68 +4,98 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="/index.js"></script>
+  <!-- analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55202426-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
 </head>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <img id="logo" src="/img/Rotten_Tomatoes_Logo.png">
+<body>
+  <!-- Facebook button -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Twitter button -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <img id="logo" src="/img/Rotten_Tomatoes_Logo.png">
+      </div>  
+      <div class="col-md-9" id="search-column">
+        <h3 style="color:white;">... as heard on the Adam Carolla Show</h3>
+        <div class="input-group">
+          <input type="text" class="form-control" name="title" id="searchInput" placeholder="enter movie title here to find it on RottenTomatoes!">
+          <span class="input-group-btn">
+            <form action="/searchMovies" method="post">
+              <button class="btn btn-default" id="search" type="submit">Find Movie</button>
+            </form>
+          </span>
+        </div>
+      </div>
     </div>  
-    <div class="col-md-9" id="search-column">
-      <h3 style="color:white;">... as heard on the Adam Carolla Show</h3>
-      <div class="input-group">
-        <input type="text" class="form-control" name="title" id="searchInput" placeholder="enter movie title here to find it on RottenTomatoes!">
-        <span class="input-group-btn">
-          <form action="/searchMovies" method="post">
-            <button class="btn btn-default" id="search" type="submit">Find Movie</button>
-          </form>
-        </span>
+
+    <div class="well" id="results-holder" style="display:none;">
+      <div id="search-results">
+        <div id="ajax-results"></div>
+        <!-- insert ajax movie results -->
+        <ul id="possible-matches-list">
+        </ul>
       </div>
     </div>
-  </div>  
 
-  <div class="well" id="results-holder" style="display:none;">
-    <div id="search-results">
-      <div id="ajax-results"></div>
-      <!-- insert ajax movie results -->
-      <ul id="possible-matches-list">
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h4>Upcoming Game</h4>
-        </div>
-        <div class="panel-body">
-          <div id="upcoming-game">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4>Upcoming Game</h4>
+          </div>
+          <div class="panel-body">
+            <div id="upcoming-game">
+            </div>
+          </div>
+          <div class="panel-footer">
+            <form action="/start" method="post">
+              <input type="hidden" id="mov-ids" name="movies">
+              <button style="display:none;" class="btn btn-primary" id="start-game" type="submit" value="">START GAME!</button>
+            </form>
           </div>
         </div>
-        <div class="panel-footer">
-          <form action="/start" method="post">
-            <input type="hidden" id="mov-ids" name="movies">
-            <button style="display:none;" class="btn btn-primary" id="start-game" type="submit" value="">START GAME!</button>
-          </form>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4>How to Play</h4>
+          </div>
+          <div id="instructions">
+            <p>Get started by using the search field above to find movies on Rotten Tomatoes and add them to your game. When you're ready, click "start game" to start guessing as your favorite host and see who comes out on top!</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h4>How to Play</h4>
-        </div>
-        <div id="instructions">
-          <p>Get started by using the search field above to find movies on Rotten Tomatoes and add them to your game. When you're ready, click "start game" to start guessing as your favorite host and see who comes out on top!</p>
-        </div>
-      </div>
+
+    <form action="/" method="get" class="pull-right">
+      <button class="btn btn-default" id="restart" type="submit">reset movie selection</button>
+    </form>
+    <div class="fb-like pull-left fb-button" data-href="https://www.facebook.com/therottentomatoesgame" data-width="200" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <div id="twitter-button">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="therottentomatoesgame">Tweet</a>
     </div>
   </div>
-
-  <form action="/" method="get" class="pull-right">
-    <button class="btn btn-default" id="restart" type="submit">reset movie selection</button>
-  </form>
-</div>
+</body>
 
 
 

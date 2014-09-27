@@ -48,7 +48,8 @@ $(document).ready(function() {
     $(this).siblings().fadeOut();
     $(this).fadeOut();
     $('#start-game').show();
-    $('#searchInput').val("");
+    $('#searchInput').val("").focus();
+
   });
 
   // grabs movie ids for upcoming game, puts them in form being submitted

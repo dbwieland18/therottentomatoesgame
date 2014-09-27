@@ -10,7 +10,6 @@ enable :sessions
 Rotten.api_key = "pddzts5bbcxpagtke4q5b6cn"
 
 get '/' do
-  session.clear
   erb :index
 end
 
@@ -26,10 +25,6 @@ post '/searchMovies' do
   end
 
   JSON.generate(filtered_results)
-end
-
-post '/addToGame' do
-  session[params[:movieTitle]] = params[:movieId]
 end
 
 post '/start' do
